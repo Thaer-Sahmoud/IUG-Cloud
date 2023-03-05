@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>File Upload Form</title>
+    <style>
+	/* Style for the sidebar */
+      .sidebar {
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #f1f1f1;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+      
+      /* Style for the buttons in the sidebar */
+      .sidebar a {
+        display: block;
+        padding: 16px;
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+        transition: background-color 0.3s ease;
+      }
+      
+      /* Style for the active button in the sidebar */
+      .sidebar a.active {
+        background-color: #4CAF50;
+        color: white;
+      }
+      
+      /* Style for the hover effect on buttons in the sidebar */
+      .sidebar a:hover {
+        background-color: darkgreen;
+        color: white;
+      }
+      
+      /* Style for the main content area */
+      .content {
+        margin-left: 200px;
+        padding: 20px;
+      }
+	  
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      #container {
+        width: 80%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="file"] {
+        margin: 20px 0;
+      }
+
+      button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="{{ url_for('upload') }}" class="active">Upload</a>
+      <a href="{{ url_for('view') }}">View</a>
+      <a href="{{ url_for('Images') }}">Images</a>
+      <a href="{{ url_for('KEYs') }}">Keys</a>
+      <a href="{{ url_for('Statistics') }}">Statistics</a>
+    </div>
+    <div id="container">
+      <h1>File Upload Form</h1>
+      <form action="{{ url_for('get_file') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif" required>
+        <button type="submit">Upload File</button>
+      </form>
+    </div>
+  </body>
+</html>
