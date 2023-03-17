@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Webpage</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .item {
+        text-align: center;
+      }
+
+      .item img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .item .name {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <div class="sidebar">
+      <a href="{{ url_for('upload') }}" >Upload</a>
+      <a href="{{ url_for('view') }}" class="active">View</a>
+      <a href="{{ url_for('Images') }}">Images</a>
+      <a href="{{ url_for('KEYs') }}">Keys</a>
+      <a href="{{ url_for('Statistics') }}">Statistics</a>
+    </div>
+
+        <div class="container">
+
+                {% for image_path in image_paths %}
+                <div class="item">
+                <img src="{{ url_for('static', filename=image_path) }}" alt="image" width="300" height="300">
+                <div class="name">{{ image_path}}</div>
+                </div>
+                {% endfor %}
+
+        </div>
+
+    <div class="content">
+      <!-- Your main content goes here -->
+      <h1>You Are in View Page</h1>
+    </div>
+  </body>
+</html>
