@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cloud Assignment</title>
+    <style>
+    #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin: auto;
+  margin-top: 100px;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+      /* Style for the sidebar */
+      .sidebar {
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #f1f1f1;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      /* Style for the buttons in the sidebar */
+      .sidebar a {
+        display: block;
+        padding: 16px;
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      /* Style for the active button in the sidebar */
+      .sidebar a.active {
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      /* Style for the hover effect on buttons in the sidebar */
+      .sidebar a:hover {
+        background-color: darkgreen;
+        color: white;
+      }
+
+      /* Style for the main content area */
+      .content {
+        margin-left: 200px;
+        padding: 20px;
+      }
+            body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      #container {
+        width: 80%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="file"] {
+        margin: 20px 0;
+      }
+
+      button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      #new-div {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#new-div label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#new-div input[type="number"] {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+#new-div select {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+#new-div button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#new-div button:hover {
+  background-color: #3e8e41;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  margin-right: 10px;
+}
+
+.form-group button {
+  margin-left: 10px;
+}
+    </style>
+  </head>
+  <body>
+
+
+    <div class="sidebar">
+      <a href="{{ url_for('upload') }}" >Upload</a>
+      <a href="{{ url_for('view') }}">View</a>
+      <a href="{{ url_for('Images') }}"class="active">Images</a>
+      <a href="{{ url_for('KEYs') }}">Keys</a>
+      <a href="{{ url_for('Statistics') }}">Statistics</a>
+    </div>
+    
+    <div class="content">
+      <!-- Your main content goes here -->
+
+
+
+        <h1>Get Images from Database</h1>
+
+
+        <div style="text-align: center;">
+        <form action="{{ url_for('SelectImages') }}" method="POST" enctype="multipart/form-data" style="margin-right: 10px;" >
+          <button type="submit" class="btn-submit" style="margin" style="margin: auto;">Run SELECT statment from Database</button>
+        </form>
+        </div>
+      <table id="customers">
+        <tr>
+          <th>Image Key</th>
+          <th>Image Name</th>
+          <th>Image Path</th>
+        </tr>
+          {% for element in result %}
+           <tr>
+               <td> {{ element[0] }} </td>
+               <td> {{ element [1] }} </td>
+                <td>
+                  <a href="{{ url_for('static', filename='uploads/' + element [1]) }}">
+                    {{element [1]}}
+                  </a>
+
+           </tr>
+          {% endfor %}
+      </table>
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
